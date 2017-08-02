@@ -1,0 +1,20 @@
+<form class="login-section" id="loginForm" >
+  <fieldset>
+    <legend>Login</legend>
+    <div class="input-single">
+      <label>Email</label>
+      <input type="text">
+    </div>
+
+    <div class="input-single">
+      <label>Password</label>
+      <input type="password">
+    </div>
+
+    <div class="input-single">
+      <label><input type="checkbox"> Remember me</label>
+    </div>
+
+    <button type="submit" class="button-big button-block" >Log in</button>
+  </fieldset>
+</form>

@@ -1,0 +1,21 @@
+<form class="signup-section" id="signupForm" >
+  <fieldset>
+    <legend>Sign Up</legend>
+    <div class="input-single">
+      <label>Email</label>
+      <input type="text">
+    </div>
+
+    <div class="input-single">
+      <label>Password</label>
+      <input type="password">
+    </div>
+
+    <div class="input-single">
+      <label>Confirm password</label>
+      <input type="password">
+    </div>
+
+    <button type="submit" class="button-success button-big button-block" >Sign up!</button>
+  </fieldset>
+</form>
