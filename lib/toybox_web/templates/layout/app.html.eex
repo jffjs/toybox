@@ -19,7 +19,11 @@
           <h1>ToyBox CMS</h1>
           <ul class="nav nav-pills pull-right">
             <li><a href="<%= page_path(@conn, :signup) %>">Get Started</a></li>
-            <li><a href="<%= page_path(@conn, :login) %>">Login</a></li>
+            <%= if @logged_in? do %>
+              <li><%= link("Logout", to: session_path(@conn, :delete), method: :delete) %></li>
+            <% else %>
+              <li><a href="/login">Login</a></li>
+            <% end %>
           </ul>
         </nav>
       </header>

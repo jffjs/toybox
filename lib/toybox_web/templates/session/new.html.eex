@@ -1,0 +1,21 @@
+<%= form_for @conn, session_path(@conn, :create),
+    [method: :post, as: :user, class: "login-section", id: "loginForm"], fn f -> %>
+  <fieldset>
+    <legend>Login</legend>
+    <div class="input-single">
+      <label>Email</label>
+      <%= text_input f, :email %>
+    </div>
+
+    <div class="input-single">
+      <label>Password</label>
+      <%= password_input f, :password %>
+    </div>
+
+    <div class="input-single">
+      <label><input type="checkbox"> Remember me</label>
+    </div>
+
+    <%= submit "Log in", class: "button-big button-block" %>
+  </fieldset>
+<% end %>
