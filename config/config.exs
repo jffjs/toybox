@@ -6,15 +6,15 @@
 use Mix.Config
 
 # General application configuration
-config :toybox,
-  ecto_repos: [Toybox.Repo]
+config :chardee,
+  ecto_repos: [Chardee.Repo]
 
 # Configures the endpoint
-config :toybox, ToyboxWeb.Endpoint,
+config :chardee, ChardeeWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "8BWZi0PR/q7FTVKeuaFuoAAu8UmC2dMyhzm7i63SsGQErz8KloOcxzOgveq/fHYf",
-  render_errors: [view: ToyboxWeb.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: Toybox.PubSub,
+  render_errors: [view: ChardeeWeb.ErrorView, accepts: ~w(html json)],
+  pubsub: [name: Chardee.PubSub,
            adapter: Phoenix.PubSub.PG2]
 
 # Configures Elixir's Logger

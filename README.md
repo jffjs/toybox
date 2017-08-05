@@ -1,4 +1,4 @@
-# Toybox
+# Chardee
 
 To start your Phoenix server:
 

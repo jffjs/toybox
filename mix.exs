@@ -1,9 +1,9 @@
-defmodule Toybox.Mixfile do
+defmodule Chardee.Mixfile do
   use Mix.Project
 
   def project do
     [
-      app: :toybox,
+      app: :chardee,
       version: "0.0.1",
       elixir: "~> 1.4",
       elixirc_paths: elixirc_paths(Mix.env),
@@ -19,7 +19,7 @@ defmodule Toybox.Mixfile do
   # Type `mix help compile.app` for more information.
   def application do
     [
-      mod: {Toybox.Application, []},
+      mod: {Chardee.Application, []},
       extra_applications: [:logger, :runtime_tools]
     ]
   end

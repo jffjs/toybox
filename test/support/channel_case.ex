@@ -1,4 +1,4 @@
-defmodule ToyboxWeb.ChannelCase do
+defmodule ChardeeWeb.ChannelCase do
   @moduledoc """
   This module defines the test case to be used by
   channel tests.
@@ -21,15 +21,15 @@ defmodule ToyboxWeb.ChannelCase do
       use Phoenix.ChannelTest
 
       # The default endpoint for testing
-      @endpoint ToyboxWeb.Endpoint
+      @endpoint ChardeeWeb.Endpoint
     end
   end
 
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Toybox.Repo)
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Chardee.Repo)
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(Toybox.Repo, {:shared, self()})
+      Ecto.Adapters.SQL.Sandbox.mode(Chardee.Repo, {:shared, self()})
     end
     :ok
   end

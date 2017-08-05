@@ -1,4 +1,4 @@
-defmodule Toybox.Repo.Migrations.CreateCredentials do
+defmodule Chardee.Repo.Migrations.CreateCredentials do
   use Ecto.Migration
 
   def change do
