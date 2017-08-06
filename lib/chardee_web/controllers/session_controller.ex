@@ -10,9 +10,8 @@ defmodule ChardeeWeb.SessionController do
     case Accounts.authenticate_by_email_password(email, password) do
       {:ok, user} ->
         conn
+        |> Guardian.Plug.sign_in(user)
         |> put_flash(:info, "Welcome back!")
-        |> put_session(:user_id, user.id)
-        |> configure_session(renew: true)
         |> redirect(to: "/")
       {:error, :unauthorized} ->
         conn
@@ -23,7 +22,8 @@ defmodule ChardeeWeb.SessionController do
 
   def delete(conn, _params) do
     conn
-    |> configure_session(drop: true)
+    |> Guardian.Plug.sign_out
+    |> put_flash(:info, "Logged out")
     |> redirect(to: "/")
   end
 end

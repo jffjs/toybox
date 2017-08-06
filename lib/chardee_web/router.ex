@@ -7,6 +7,11 @@ defmodule ChardeeWeb.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+  end
+
+  pipeline :browser_auth do
+    plug Guardian.Plug.VerifySession
+    plug Guardian.Plug.LoadResource
     plug :logged_in?
   end
 
@@ -15,13 +20,13 @@ defmodule ChardeeWeb.Router do
   end
 
   scope "/", ChardeeWeb do
-    pipe_through :browser # Use the default browser stack
+    pipe_through [:browser, :browser_auth ] # Use the default browser stack
 
     get "/", PageController, :index
-    get "/signup", PageController, :signup
     resources "/users", UserController
     resources "/sessions", SessionController, only: [:new, :create, :delete],
                                               singleton: true
+    get "/signup", UserController, :register
     get "/login", SessionController, :new
   end
 
@@ -31,23 +36,11 @@ defmodule ChardeeWeb.Router do
   # end
 
   defp logged_in?(conn, _) do
-    case get_session(conn, :user_id) do
-      nil ->
-        assign(conn, :logged_in?, false)
-      user_id ->
+    case Guardian.Plug.current_resource(conn) do
+      %Chardee.Accounts.User{} ->
         assign(conn, :logged_in?, true)
-    end
-  end
-
-  defp authenticate_user(conn, _) do
-    case get_session(conn, :user_id) do
-      nil ->
-        conn
-        |> Phoenix.Controller.put_flash(:error, "Login required")
-        |> Phoenix.Controller.redirect(to: "/")
-        |> halt()
-      user_id ->
-        assign(conn, :current_user, Chardee.Accounts.get_user!(user_id))
+      _ ->
+        assign(conn, :logged_in?, false)
     end
   end
 end

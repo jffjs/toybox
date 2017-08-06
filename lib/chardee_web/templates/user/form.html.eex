@@ -12,12 +12,6 @@
   </div>
 
   <div class="input-single">
-    <%= label f, :username %>
-    <%= text_input f, :username %>
-    <%= error_tag f, :username %>
-  </div>
-
-  <div class="input-single">
     <%=  inputs_for f, :credential, fn cf -> %>
       <%= label cf, :email %>
       <%= text_input cf, :email %>

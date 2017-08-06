@@ -110,8 +110,6 @@ defmodule Chardee.Accounts do
     User.changeset(user, %{})
   end
 
-  alias Chardee.Accounts.Credential
-
   @doc """
   Returns the list of credentials.
 
@@ -140,6 +138,27 @@ defmodule Chardee.Accounts do
 
   """
   def get_credential!(id), do: Repo.get!(Credential, id)
+
+  @doc """
+  Gets a single credential by email.
+
+  Returns `nil` if the Credential does not exist.
+  end
+
+  ## Examples
+
+      iex> get_credential_by_email("foo@bar.com")
+      %Credential{}
+
+      iex> get_credential_by_email("bar@foo.com")
+      nil
+
+  """
+  def get_credential_by_email(email) do
+    Credential
+    |> Repo.get_by(email: email)
+    |> Repo.preload(:user)
+  end
 
   @doc """
   Creates a credential.
@@ -206,15 +225,13 @@ defmodule Chardee.Accounts do
     Credential.changeset(credential, %{})
   end
 
-  def authenticate_by_email_password(email, _password) do
-    query =
-      from u in User,
-      inner_join: c in assoc(u, :credential),
-      where: c.email == ^email
-
-    case Repo.one(query) do
-      %User{} = user -> {:ok, user}
-      nil -> {:error, :unauthorized}
+  def authenticate_by_email_password(email, password) do
+    credential = get_credential_by_email(email)
+    case Comeonin.Bcrypt.check_pass(credential, password) do
+      {:ok, credential} ->
+        {:ok, credential.user}
+      {:error, _} ->
+        :unauthorized
     end
   end
 end

@@ -5,7 +5,6 @@ defmodule Chardee.Accounts.User do
 
 
   schema "users" do
-    field :username, :string
     field :name, :string
     has_one :credential, Credential
 
@@ -15,8 +14,7 @@ defmodule Chardee.Accounts.User do
   @doc false
   def changeset(%User{} = user, attrs) do
     user
-    |> cast(attrs, [:name, :username])
-    |> validate_required([:name, :username])
-    |> unique_constraint(:username)
+    |> cast(attrs, [:name])
+    |> validate_required([:name])
   end
 end

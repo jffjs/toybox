@@ -40,6 +40,7 @@ defmodule ChardeeWeb do
       import ChardeeWeb.Router.Helpers
       import ChardeeWeb.ErrorHelpers
       import ChardeeWeb.Gettext
+      import ChardeeWeb.AuthHelpers
     end
   end
 

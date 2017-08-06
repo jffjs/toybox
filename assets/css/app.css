@@ -3,13 +3,24 @@ header {
   color: var(--color-white);
   background: var(--color-primary);
   padding: 0.5em 1em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 header nav a,
 header nav a:hover {
   color: var(--color-white);
 }
-header nav > h1 {
-  display: inline-block;
+header .logo {
+  display: flex;
+  align-items: center;
+}
+header .logo img {
+  height: 40px;
+  margin-top: 2px;
+}
+header .logo h2 {
+  color: var(--color-white);
   margin-bottom: 0;
 }
 header nav > ul {

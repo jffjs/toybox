@@ -6,8 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
 
-    <title>Chardee</title>
+    <title>chardee</title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/vendor.css") %>">
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
   </head>
@@ -15,11 +17,14 @@
   <body>
     <div class="container">
       <header class="header">
+        <div class="logo" >
+          <a href="/" ><img src="<%= static_path(@conn, "/images/chart-logo.svg") %>" alt=""></a>
+          <a href="/" ><h2>chardee</h2></a>
+        </div>
         <nav role="navigation">
-          <h1>Chardee</h1>
           <ul class="nav nav-pills pull-right">
-            <li><a href="<%= page_path(@conn, :signup) %>">Get Started</a></li>
-            <%= if @logged_in? do %>
+            <li><a href="/signup">Get Started</a></li>
+            <%= if logged_in?(@conn) do %>
               <li><%= link("Logout", to: session_path(@conn, :delete), method: :delete) %></li>
             <% else %>
               <li><a href="/login">Login</a></li>
