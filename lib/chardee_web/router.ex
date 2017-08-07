@@ -17,6 +17,8 @@ defmodule ChardeeWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+    plug Guardian.Plug.VerifyHeader, realm: "Bearer"
+    plug Guardian.Plug.LoadResource
   end
 
   scope "/", ChardeeWeb do
@@ -30,10 +32,11 @@ defmodule ChardeeWeb.Router do
     get "/login", SessionController, :new
   end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", ChardeeWeb do
-  #   pipe_through :api
-  # end
+  scope "/api", ChardeeWeb do
+    pipe_through :api
+
+    get "/auth/:api_key", API.AuthController, :authenticate
+  end
 
   defp logged_in?(conn, _) do
     case Guardian.Plug.current_resource(conn) do

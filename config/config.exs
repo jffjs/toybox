@@ -30,7 +30,7 @@ config :guardian, Guardian,
   allowed_drift: 2000,
   verify_issuer: true,
   secret_key: "A4jNakkhzikLif/9/xNjgjcRQcB0hDEGfyJP2IKog0uEzemItJdSkaM8tcOscS1t",
-  serializer: Chardee.Accounts.GuardianSerializer
+  serializer: ChardeeWeb.TokenSerializer
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
