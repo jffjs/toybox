@@ -30,6 +30,10 @@ defmodule ChardeeWeb.Router do
                                               singleton: true
     get "/signup", UserController, :register
     get "/login", SessionController, :new
+
+    get "/dashboard", DashboardController, :index
+    get "/dashboard/new", DashboardController, :new_app
+    post "dashboard/new", DashboardController, :create_app
   end
 
   scope "/api", ChardeeWeb do

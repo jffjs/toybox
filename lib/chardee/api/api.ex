@@ -6,120 +6,120 @@ defmodule Chardee.API do
   import Ecto.Query, warn: false
   alias Chardee.Repo
 
-  alias Chardee.API.APICredential
+  alias Chardee.API.App
 
   @doc """
-  Returns the list of api_credentials.
+  Returns the list of apps.
 
   ## Examples
 
-      iex> list_api_credentials()
-      [%APICredential{}, ...]
+      iex> list_apps()
+      [%App{}, ...]
 
   """
-  def list_api_credentials do
-    Repo.all(APICredential)
+  def list_apps do
+    Repo.all(App)
   end
 
   @doc """
-  Gets a single api_credential.
+  Gets a single app.
 
   Raises `Ecto.NoResultsError` if the Api credential does not exist.
 
   ## Examples
 
-      iex> get_api_credential!(123)
-      %APICredential{}
+      iex> get_app!(123)
+      %App{}
 
-      iex> get_api_credential!(456)
+      iex> get_app!(456)
       ** (Ecto.NoResultsError)
 
   """
-  def get_api_credential!(id), do: Repo.get!(APICredential, id)
+  def get_app!(id), do: Repo.get!(App, id)
 
   @doc """
   Gets a single api credential by api key
 
-  Returns `nil` if the APICredential does not exist.
+  Returns `nil` if the App does not exist.
   end
 
   ## Examples
 
-      iex> get_api_credential_by_api_key("abcdef123")
-      %APICredential{}
+      iex> get_app_by_api_key("abcdef123")
+      %App{}
 
-      iex> get_api_credential_by_api_key("def123abc")
+      iex> get_app_by_api_key("def123abc")
       nil
 
   """
-  def get_api_credential_by_api_key(api_key) do
-    APICredential
+  def get_app_by_api_key(api_key) do
+    App
     |> Repo.get_by(api_key: api_key)
     |> Repo.preload(:user)
   end
 
   @doc """
-  Creates a api_credential.
+  Creates a app.
 
   ## Examples
 
-      iex> create_api_credential(%{field: value})
-      {:ok, %APICredential{}}
+      iex> create_app(%{field: value})
+      {:ok, %App{}}
 
-      iex> create_api_credential(%{field: bad_value})
+      iex> create_app(%{field: bad_value})
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_api_credential(attrs \\ %{}) do
-    %APICredential{}
-    |> APICredential.changeset(attrs)
+  def create_app(attrs \\ %{}) do
+    %App{}
+    |> App.changeset(attrs)
     |> Repo.insert()
   end
 
   @doc """
-  Updates a api_credential.
+  Updates a app.
 
   ## Examples
 
-      iex> update_api_credential(api_credential, %{field: new_value})
-      {:ok, %APICredential{}}
+      iex> update_app(app, %{field: new_value})
+      {:ok, %App{}}
 
-      iex> update_api_credential(api_credential, %{field: bad_value})
+      iex> update_app(app, %{field: bad_value})
       {:error, %Ecto.Changeset{}}
 
   """
-  def update_api_credential(%APICredential{} = api_credential, attrs) do
-    api_credential
-    |> APICredential.changeset(attrs)
+  def update_app(%App{} = app, attrs) do
+    app
+    |> App.changeset(attrs)
     |> Repo.update()
   end
 
   @doc """
-  Deletes a APICredential.
+  Deletes a App.
 
   ## Examples
 
-      iex> delete_api_credential(api_credential)
-      {:ok, %APICredential{}}
+      iex> delete_app(app)
+      {:ok, %App{}}
 
-      iex> delete_api_credential(api_credential)
+      iex> delete_app(app)
       {:error, %Ecto.Changeset{}}
 
   """
-  def delete_api_credential(%APICredential{} = api_credential) do
-    Repo.delete(api_credential)
+  def delete_app(%App{} = app) do
+    Repo.delete(app)
   end
 
   @doc """
-  Returns an `%Ecto.Changeset{}` for tracking api_credential changes.
+  Returns an `%Ecto.Changeset{}` for tracking app changes.
 
   ## Examples
 
-      iex> change_api_credential(api_credential)
-      %Ecto.Changeset{source: %APICredential{}}
+      iex> change_app(app)
+      %Ecto.Changeset{source: %App{}}
 
   """
-  def change_api_credential(%APICredential{} = api_credential) do
-    APICredential.changeset(api_credential, %{})
+  def change_app(%App{} = app) do
+    App.changeset(app, %{})
   end
 end

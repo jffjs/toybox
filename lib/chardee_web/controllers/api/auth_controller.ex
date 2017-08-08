@@ -2,11 +2,10 @@ defmodule ChardeeWeb.API.AuthController do
   require Logger
   use ChardeeWeb, :controller
   alias Chardee.API
-  alias Chardee.API.APICredential
 
   def authenticate(conn, %{"api_key" => api_key}) do
-    case API.get_api_credential_by_api_key(api_key) do
-      %APICredential{user: user} ->
+    case API.get_app_by_api_key(api_key) do
+      %API.App{user: user} ->
         IO.puts inspect(user)
         new_conn = Guardian.Plug.api_sign_in(conn, user)
         jwt = Guardian.Plug.current_token(new_conn)
