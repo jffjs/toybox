@@ -25,15 +25,18 @@ defmodule ChardeeWeb.Router do
     pipe_through [:browser, :browser_auth ] # Use the default browser stack
 
     get "/", PageController, :index
+    get "/signup", RegistrationController, :new
+    get "/login", SessionController, :new
+
     resources "/users", UserController
+    resources "/registrations", RegistrationController, only: [:new, :create],
+                                                        singleton: true
     resources "/sessions", SessionController, only: [:new, :create, :delete],
                                               singleton: true
-    get "/signup", UserController, :register
-    get "/login", SessionController, :new
 
     get "/dashboard", DashboardController, :index
     get "/dashboard/new", DashboardController, :new_app
-    post "dashboard/new", DashboardController, :create_app
+    post "/dashboard/new", DashboardController, :create_app
   end
 
   scope "/api", ChardeeWeb do

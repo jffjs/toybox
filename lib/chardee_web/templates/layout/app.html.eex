@@ -23,11 +23,11 @@
         </div>
         <nav role="navigation">
           <ul class="nav nav-pills pull-right">
-            <li><a href="/signup">Get Started</a></li>
+            <li><%= link("Get Started", to: registration_path(@conn, :new)) %></li>
             <%= if logged_in?(@conn) do %>
               <li><%= link("Logout", to: session_path(@conn, :delete), method: :delete) %></li>
             <% else %>
-              <li><a href="/login">Login</a></li>
+              <li><%= link("Login", to: session_path(@conn, :new)) %></li>
             <% end %>
           </ul>
         </nav>

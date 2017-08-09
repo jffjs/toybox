@@ -1,0 +1,41 @@
+<%= form_for @changeset, registration_path(@conn, :create),
+             [class: "signup-section", id: "signupForm"], fn f -> %>
+  <%= if @changeset.action do %>
+    <div class="alert alert-danger">
+      <p>Oops, something went wrong! Please check the errors below.</p>
+    </div>
+  <% end %>
+
+  <fieldset>
+    <legend>Sign Up</legend>
+    <div class="input-single">
+      <%= label f, :name, "Your name" %>
+      <%= text_input f, :name %>
+      <%= error_tag f, :name %>
+    </div>
+
+    <%=  inputs_for f, :credential, fn cf -> %>
+    <div class="input-single">
+      <%= label cf, :email %>
+      <%= text_input cf, :email %>
+      <%= error_tag cf, :email %>
+    </div>
+
+    <div class="input-single">
+      <%= label cf, :password %>
+      <%= password_input cf, :password %>
+      <%= error_tag cf, :password %>
+    </div>
+
+    <div class="input-single">
+      <%= label cf, :password_confirmation %>
+      <%= password_input cf, :password_confirmation %>
+      <%= error_tag cf, :password_confirmation %>
+    </div>
+    <% end %>
+
+    <div class="input-single">
+      <%= submit "Sign up!", class: "button-success button-big button-block" %>
+    </div>
+  </fieldset>
+<% end %>

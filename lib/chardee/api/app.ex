@@ -5,7 +5,7 @@ defmodule Chardee.API.App do
   alias Chardee.API.App
 
 
-  schema "app" do
+  schema "apps" do
     field :api_key, :string
     field :name, :string
     belongs_to :user, User

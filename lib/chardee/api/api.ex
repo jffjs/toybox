@@ -70,8 +70,8 @@ defmodule Chardee.API do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_app(attrs \\ %{}) do
-    %App{}
+  def create_app(attrs \\ %{}, user) do
+    %App{user: user}
     |> App.changeset(attrs)
     |> Repo.insert()
   end

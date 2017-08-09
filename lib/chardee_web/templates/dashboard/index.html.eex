@@ -3,3 +3,5 @@
   <li><%= app.name %></li>
 <% end %>
 </ul>
+
+<%= link "New App", to: dashboard_path(@conn, :new_app)%>
