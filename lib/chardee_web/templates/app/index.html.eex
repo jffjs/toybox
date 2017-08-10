@@ -1,0 +1,29 @@
+<h1>Your Apps</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>API Key</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= for app <- @apps do %>
+      <tr>
+        <td>
+          <%= app.name %>
+        </td>
+        <td>
+          <%= app.api_key %>
+        </td>
+        <td class="text-right">
+          <span><%= link "Show", to: app_path(@conn, :show, app) %></span>
+          <span><%= link "Edit", to: app_path(@conn, :edit, app) %></span>
+          <span><%= link "Delete", to: app_path(@conn, :delete, app), method: :delete %></span>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link "New App", to: app_path(@conn, :new)%>

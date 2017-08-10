@@ -12,7 +12,7 @@ defmodule ChardeeWeb.SessionController do
         conn
         |> Guardian.Plug.sign_in(user)
         |> put_flash(:info, "Welcome back!")
-        |> redirect(to: dashboard_path(conn, :index))
+        |> redirect(to: "/")
       {:error, :unauthorized} ->
         conn
         |> put_flash(:error, "Bad email/password combination")

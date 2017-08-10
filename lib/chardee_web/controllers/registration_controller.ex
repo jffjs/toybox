@@ -14,7 +14,7 @@ defmodule ChardeeWeb.RegistrationController do
         conn
         |> Guardian.Plug.sign_in(user)
         |> put_flash(:info, "Welcome aboard!")
-        |> redirect(to: dashboard_path(conn, :index))
+        |> redirect(to: "/")
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)
     end

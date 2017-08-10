@@ -28,15 +28,12 @@ defmodule ChardeeWeb.Router do
     get "/signup", RegistrationController, :new
     get "/login", SessionController, :new
 
+    resources "/apps", AppController
     resources "/users", UserController
     resources "/registrations", RegistrationController, only: [:new, :create],
                                                         singleton: true
     resources "/sessions", SessionController, only: [:new, :create, :delete],
                                               singleton: true
-
-    get "/dashboard", DashboardController, :index
-    get "/dashboard/new", DashboardController, :new_app
-    post "/dashboard/new", DashboardController, :create_app
   end
 
   scope "/api", ChardeeWeb do

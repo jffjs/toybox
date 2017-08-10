@@ -71,7 +71,7 @@ defmodule Chardee.API do
 
   """
   def create_app(attrs \\ %{}, user) do
-    %App{user: user}
+    %App{user: user, api_key: generate_api_key()}
     |> App.changeset(attrs)
     |> Repo.insert()
   end
@@ -121,5 +121,14 @@ defmodule Chardee.API do
   """
   def change_app(%App{} = app) do
     App.changeset(app, %{})
+  end
+
+  @doc """
+  Generates an API Key.
+  """
+  def generate_api_key() do
+    :crypto.hash(:md5, Ecto.UUID.generate())
+    |> Base.encode32(padding: false)
+    |> String.downcase()
   end
 end

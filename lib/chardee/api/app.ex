@@ -16,7 +16,7 @@ defmodule Chardee.API.App do
   @doc false
   def changeset(%App{} = app, attrs) do
     app
-    |> cast(attrs, [:name, :api_key])
+    |> cast(attrs, [:name])
     |> validate_required([:name, :api_key])
     |> unique_constraint(:api_key)
   end
