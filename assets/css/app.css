@@ -1,4 +1,8 @@
 /* This file is for your main application css. */
+:root {
+  --color-primary: coral;
+  --size-sm: 48rem;
+}
 header {
   color: var(--color-white);
   background: var(--color-primary);
@@ -39,8 +43,43 @@ header nav > ul > li:last-child:after {
   content: "";
 }
 
-main {
-  max-width: 1200px;
+.wrapper {
+  display: grid;
+  grid-template-columns: 12rem calc(100% - 12rem);
+  max-width: 75rem;
   margin: 0 auto;
-  padding: 30px;
+  padding: 2rem;
+}
+.wrapper.logged-out {
+  display: block;
+}
+.wrapper nav {
+  text-align: right;
+  padding-right: 1rem;
+  border-right: 1px solid var(--color-silver);
+}
+.wrapper nav a {
+  display: block;
+  margin: .15rem;
+}
+.wrapper main {
+  padding-left: 2rem;
+}
+@media(max-width: var(--size-sm)) {
+  .wrapper {
+    display: block;
+    padding-top: 0;
+  }
+  .wrapper nav {
+    padding: 1em 0 0 0;
+    text-align: center;
+    border: none;
+  }
+  .wrapper nav a {
+    display: inline-block;
+  }
+  .wrapper main {
+    padding: 2rem 0;
+    margin: 0 auto;
+  }
 }

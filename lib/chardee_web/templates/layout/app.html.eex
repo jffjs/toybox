@@ -23,22 +23,38 @@
         </div>
         <nav role="navigation">
           <ul class="nav nav-pills pull-right">
-            <li><%= link("Get Started", to: registration_path(@conn, :new)) %></li>
             <%= if logged_in?(@conn) do %>
               <li><%= link("Logout", to: session_path(@conn, :delete), method: :delete) %></li>
             <% else %>
+              <li><%= link("Get Started", to: registration_path(@conn, :new)) %></li>
               <li><%= link("Login", to: session_path(@conn, :new)) %></li>
             <% end %>
           </ul>
         </nav>
       </header>
 
-      <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
-      <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
 
-      <main role="main">
-        <%= render @view_module, @view_template, assigns %>
-      </main>
+      <%= if logged_in?(@conn) do %>
+      <div class="wrapper" >
+        <nav>
+          <%= link "Apps", to: app_path(@conn, :index) %>
+          <%= link "Users", to: user_path(@conn, :index) %>
+        </nav>
+        <main role="main">
+          <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
+          <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+          <%= render @view_module, @view_template, assigns %>
+        </main>
+      </div>
+      <% else %>
+      <div class="wrapper logged-out" >
+        <main role="main">
+          <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
+          <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+          <%= render @view_module, @view_template, assigns %>
+        </main>
+      </div>
+      <% end %>
 
     </div> <!-- /container -->
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>

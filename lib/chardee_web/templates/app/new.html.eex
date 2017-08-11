@@ -14,12 +14,6 @@
   </div>
 
   <div class="input-single">
-    <%= label f, :api_key %>
-    <%= text_input f, :api_key %>
-    <%= error_tag f, :api_key %>
-  </div>
-
-  <div class="input-single">
     <%= submit "Submit" %>
   </div>
 <% end %>
