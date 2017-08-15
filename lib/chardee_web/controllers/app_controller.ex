@@ -17,7 +17,7 @@ defmodule ChardeeWeb.AppController do
   def create(conn, %{"app" => app_params}) do
     user = Guardian.Plug.current_resource(conn)
     case API.create_app(app_params, user) do
-      {:ok, user} ->
+      {:ok, _} ->
         conn
         |> put_flash(:info, "App created successfully.")
         |> redirect(to: app_path(conn, :index))

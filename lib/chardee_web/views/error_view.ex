@@ -1,6 +1,10 @@
 defmodule ChardeeWeb.ErrorView do
   use ChardeeWeb, :view
 
+  def render("401.json", _assigns) do
+    %{test: "test"}
+  end
+
   def render("404.html", _assigns) do
     "Page not found"
   end

@@ -36,10 +36,11 @@ defmodule ChardeeWeb.Router do
                                               singleton: true
   end
 
-  scope "/api", ChardeeWeb do
+  scope "/api", ChardeeWeb.API do
     pipe_through :api
 
-    get "/auth/:api_key", API.AuthController, :authenticate
+    post "/auth/:api_key", AuthController, :authenticate
+    get "/test", TestController, :index
   end
 
   defp logged_in?(conn, _) do

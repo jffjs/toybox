@@ -3,12 +3,14 @@ defmodule Chardee.API.App do
   import Ecto.Changeset
   alias Chardee.Accounts.User
   alias Chardee.API.App
+  alias Chardee.API.RateLimit
 
 
   schema "apps" do
     field :api_key, :string
     field :name, :string
     belongs_to :user, User
+    belongs_to :rate_limit, RateLimit
 
     timestamps()
   end

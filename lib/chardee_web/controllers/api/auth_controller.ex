@@ -1,15 +1,15 @@
 defmodule ChardeeWeb.API.AuthController do
-  require Logger
   use ChardeeWeb, :controller
   alias Chardee.API
+  alias ChardeeWeb.API.ErrorView
 
-  def authenticate(conn, %{"api_key" => api_key}) do
-    case API.get_app_by_api_key(api_key) do
-      %API.App{user: user} ->
-        IO.puts inspect(user)
+  def authenticate(conn, %{"api_key" => api_key,
+                           "username" => email,
+                           "password" => password}) do
+    case API.authenticate_app_by_email_password(api_key, email, password) do
+      {:ok, %API.App{user: user}} ->
         new_conn = Guardian.Plug.api_sign_in(conn, user)
         jwt = Guardian.Plug.current_token(new_conn)
-        Logger.info "jwt: #{jwt}"
         {:ok, claims} = Guardian.Plug.claims(new_conn)
         exp = Map.get(claims, "exp")
 
@@ -17,10 +17,10 @@ defmodule ChardeeWeb.API.AuthController do
         |> put_resp_header("authorization", "Bearer #{jwt}")
         |> put_resp_header("x-expires", "#{exp}")
         |> render("authenticate.json", jwt: jwt, exp: exp)
-      nil ->
+      {:error, _}->
         conn
         |> put_status(401)
-        |> render("error.json", message: "Unable to authenticate")
+        |> render(ErrorView, :"401", message: "Authentication required.")
     end
   end
 end

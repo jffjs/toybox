@@ -6,6 +6,7 @@ defmodule Chardee.API do
   import Ecto.Query, warn: false
   alias Chardee.Repo
 
+  alias Chardee.Accounts
   alias Chardee.API.App
 
   @doc """
@@ -130,5 +131,18 @@ defmodule Chardee.API do
     :crypto.hash(:md5, Ecto.UUID.generate())
     |> Base.encode32(padding: false)
     |> String.downcase()
+  end
+
+  @doc """
+  Authenticate app access by email and password.
+  """
+  def authenticate_app_by_email_password(api_key, email, password) do
+    with {:ok, _} <- Accounts.authenticate_by_email_password(email, password),
+         %App{} = app <- get_app_by_api_key(api_key) do
+      {:ok, app}
+    else
+      :unauthorized -> {:error, :unauthorized}
+      nil -> {:error, :invalid_api_key}
+    end
   end
 end
